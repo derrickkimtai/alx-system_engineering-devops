@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#bash script that stops 4-to_infinity_and_beyond
+terminate()
+{
+	exit 0
+}
+trap 'terminate' SIGTERM
+
+while true
+do
+	echo "4-to_infinity_and_beyond"
+	sleep 2
+done
