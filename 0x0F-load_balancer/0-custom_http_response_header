@@ -3,19 +3,18 @@
 apt-get -y update
 apt-get -y install nginx
 HOSTNAME=$(hostname)
-cat<<EOF > /etc/nginx/sites-available/default
+cat <<EOF > /etc/nginx/sites-available/default
 server {
-	listen 80 default_server
-	listen [::]:80 default_server;
+        listen 80 default_server;
+        listen [::]:80 default_server;
 
-	# Other nginx configuration settings...
+        # Other nginx configuration settings...
 
-	location / {
-		add_header X-served-By $HOSTNAME;
-	}
+        location / {
+                add_header X-Served-By $HOSTNAME;
+        }
 }
 EOF
-
-systemcl restart nginx
+systemtcl restart nginx
 
 exit 0
