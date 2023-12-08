@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # Correctly assigning arguments to variables
 domain="$1"
 subdomain="$2"
