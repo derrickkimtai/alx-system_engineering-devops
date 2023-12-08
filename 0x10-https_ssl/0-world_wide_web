@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+# Correctly assigning arguments to variables
+domain="$1"
+subdomain="$2"
+
+# Function to fetch DNS record information
+get_record_info() {
+    local result
+    result=$(dig +short -t A "$1.$domain")
+
+    if [ -z "$result" ]; then
+        echo "No record found"
+    else
+        echo "$result"
+    fi
+}
+
+# Function to display subdomain information
+display_subdomain_info() {
+    local record_type
+    local destination
+
+    destination=$(get_record_info "$1")  # Fetching record information
+    if [[ "$destination" == "No record found" ]]; then
+        record_type="No record"
+    else
+        record_type="A"
+    fi
+    printf "The subdomain %s is a %s record and points to %s\n" "$1" "$record_type" "$destination"
+}
+
+if [[ -n "$subdomain" ]]; then  # Checking for the presence of subdomain argument
+    display_subdomain_info "$subdomain"  # Display information for the provided subdomain
+else    
+    for subdomain in "www" "lb-01" "web-01" "web-02"; do  # Looping through default subdomains
+        display_subdomain_info "$subdomain"  # Display information for each default subdomain
+    done    
+fi
+
