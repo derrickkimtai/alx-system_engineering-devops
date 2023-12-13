@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+# Update package lists and install nginx
+sudo apt update
+sudo apt install nginx -y
+
+# Create a custom 404 page
+sudo bash -c 'cat << EOF > /var/www/html/404.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 Not Found</title>
+</head>
+<body>
+    <h1>Error 404: Not Found</h1>
+    <p>Ceci n'est pas une page.</p>
+</body>
+</html>
+EOF'
+
+# Configure Nginx for redirection
+sudo bash -c 'cat << EOF > /etc/nginx/sites-available/default
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost;
+
+    location / {
+        add_header X-served-By $HOSTNAME;
+        error_page 404 /404.html;
+    }
+
+    location /hbnb_static {
+        alias /data/web_static/current/;
+    }
+
+    location /redirect_me {
+        return 301 https://www.example.com/new-page;
+    }
+
+    error_page 404 /404.html;
+
+    location = /404.html {
+        root /var/www/html;
+        internal;
+    }
+}
+EOF'
+
+# Restart Nginx to apply changes
+sudo systemctl restart nginx
+
