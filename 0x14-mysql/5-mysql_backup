@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Check for the correct number of arguments
+dump_file="backup.sql"
+
+# Compressed archive file name format
+archive_name="$(date +'%d-%m-%Y').tar.gz"
+
+# Perform MySQL dump
+mysqldump -u root -p"$1" --all-databases > "$dump_file"
+
+# Create compressed archive
+tar -czf "$archive_name" "$dump_file"
+
+# Clean up dump file
+rm "$dump_file"
+
+echo "MySQL backup created: $archive_name"
+
