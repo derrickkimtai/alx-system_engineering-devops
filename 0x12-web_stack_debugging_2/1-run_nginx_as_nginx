@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-stop the running Nginx service
+#stop the running Nginx service
 service nginx stop
 
 # Modify the configuration to run Nginx as the nginx user
