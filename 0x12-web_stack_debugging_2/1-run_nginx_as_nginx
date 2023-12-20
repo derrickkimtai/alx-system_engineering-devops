@@ -3,11 +3,10 @@
 service nginx stop
 
 # Modify the configuration to run Nginx as the nginx user
-sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+sed -i 's/user .*/user nginx;/' /etc/nginx/nginx.conf
 
 # Modify the configuration to listen on all active IPs on port 8080
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/g' /etc/nginx/sites-available/default
+sed -i 's/listen [0-9]*;/listen 8080;/g' /etc/nginx/sites-available/default
 
 # Start the Nginx service
 service nginx start
-
