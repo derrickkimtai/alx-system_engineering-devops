@@ -10,4 +10,4 @@ sed -i 's/user .*/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/listen [0-9]*;/listen 8080;/g' /etc/nginx/sites-available/default
 
 # Start the Nginx service
-service nginx start
+sudo -u nginx service nginx start
