@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 #stop the running Nginx service
+pkill apache2
 service nginx stop
-
+chmod 644 /etc/nginx/nginx.conf
 # Modify the configuration to run Nginx as the nginx user
 sed -i 's/user .*/user nginx;/' /etc/nginx/nginx.conf
 
