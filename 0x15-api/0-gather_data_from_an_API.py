@@ -1,4 +1,4 @@
-#!/usr/bin/ptyhon3
+#!/usr/bin/python3
 """
 this script fetches and dislays  the todo list of an employee
 """
