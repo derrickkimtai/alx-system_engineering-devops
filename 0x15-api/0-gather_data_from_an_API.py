@@ -13,7 +13,7 @@ def get_employee(employee_id):
         data = json.loads(url.read().decode())
 
         total_tasks = len(data)
-        completed_tasks = sum(task['compeleted'] for task in data)
+        completed_tasks = sum(task['completed'] for task in data)
         return data, total_tasks, completed_tasks
     
 def display_progress(employee_name, completed_tasks, total_tasks):
